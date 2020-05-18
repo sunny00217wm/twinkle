@@ -1727,6 +1727,14 @@ Morebits.wiki = {};
  * @returns {boolean}
  */
 Morebits.wiki.isPageRedirect = function wikipediaIsPageRedirect() {
+	if (mw.config.get('wgIsRedirect') || document.getElementById('softredirect')) {
+	    return true
+	}
+	var pagehtml = $('div#mw-content-text')[0];
+	pagehtml = $('<div>').append(pagehtml).html();
+	//{{Delete}}# 重定向 [[頁面]]
+	var findoldredirect_a = /<div id="speedy-delete" class="template-delete"><\/div>(<p>#|\n<ol><li>)(重定向|Redirect)(\s+|)<a href="\/w(iki|)\//gmi
+	
 	return !!(mw.config.get('wgIsRedirect') || document.getElementById('softredirect'));
 };
 
